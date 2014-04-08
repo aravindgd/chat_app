@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  callers_id: 
+  receivers_id: 
+  order_id: 1
+  call_type: false
+
+two:
+  callers_id: 
+  receivers_id: 
+  order_id: 1
+  call_type: false
