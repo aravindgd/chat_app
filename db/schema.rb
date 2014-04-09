@@ -22,16 +22,17 @@ ActiveRecord::Schema.define(version: 20140408143558) do
   end
 
   create_table "meetings", force: true do |t|
-    t.integer  "callers_id"
-    t.integer  "receivers_id"
+    t.integer  "caller_id"
+    t.integer  "receiver_id"
     t.integer  "order_id"
-    t.integer  "call_type",    default: 0
+    t.integer  "duration"
+    t.integer  "call_type",   default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "meetings", ["callers_id"], name: "index_meetings_on_callers_id"
-  add_index "meetings", ["receivers_id"], name: "index_meetings_on_receivers_id"
+  add_index "meetings", ["caller_id"], name: "index_meetings_on_caller_id"
+  add_index "meetings", ["receiver_id"], name: "index_meetings_on_receiver_id"
 
   create_table "receivers", force: true do |t|
     t.string   "name"
