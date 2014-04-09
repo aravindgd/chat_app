@@ -21,9 +21,7 @@
         <td><%= meeting.order_id %></td>
         <td><%= meeting.call_type %></td>
         <td><%= meeting.duration %></td>
-        <td><%= link_to 'Show', meeting %></td>
-        <td><%= link_to 'Edit', edit_meeting_path(meeting) %></td>
-        <td><%= link_to 'Destroy', meeting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', meeting, class: "btn btn-info" %></td>
       </tr>
     <% end %>
   </tbody>
