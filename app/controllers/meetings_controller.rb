@@ -22,22 +22,21 @@ class MeetingsController < ApplicationController
 	end
 
 	def voice
-		caller_id = "+13174268213"
 		number = params[:PhoneNumber]
 		response = Twilio::TwiML::Response.new do |r|
-			# Should be your Twilio Number or a verified Caller ID
-			if /^[\d\+\-\(\) ]+$/.match(number)
-				r.Gather :numDigits => '5', :action => '/handle_calls_from_phone', :method => 'get' do |g|
-
-				end
-			else
-				r.Dial :callerId => caller_id do |d|
+			Should be your Twilio Number or a verified Caller ID
+			r.Dial :callerId => caller_id do |d|
+				# Test to see if the PhoneNumber is a number, or a Client ID. In
+				# this case, we detect a Client ID by the presence of non-numbers
+				# in the PhoneNumber parameter.
+				if /^[\d\+\-\(\) ]+$/.match(number)
+					d.Number(CGI::escapeHTML number)
+				else
 					d.Client number
 				end
 			end
 		end
 		render :text => response.text
-
 	end
 
 
@@ -45,9 +44,10 @@ class MeetingsController < ApplicationController
 		caller_id = "+13174268213"
 		number = params[:PhoneNumber]
 		response = Twilio::TwiML::Response.new do |r|
+			r.say "Enter the session key provided to you"
 			# Should be your Twilio Number or a verified Caller ID
 			if /^[\d\+\-\(\) ]+$/.match(number)
-				r.Gather :numDigits => '5', :action => '/handle_calls_from_phone', :method => 'get' do |g|
+				r.Gather :finishOnKey => '*', :action => '/handle_calls_from_phone', :method => 'get' do |g|
 
 				end
 			else
