@@ -1,4 +1,4 @@
-<%= form_for(@meeting) do |f| %>
+<%= form_for(@meeting, html: { class: "form-horizontal" }) do |f| %>
   <% if @meeting.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@meeting.errors.count, "error") %> prohibited this meeting from being saved:</h2>
@@ -11,23 +11,28 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :callers_id %><br>
-    <%= f.text_field :callers_id %>
+  <div class="form-group">
+    <%= f.label :caller_id, class: "col-sm-3" %>
+    <div class="col-sm-3">
+    <%= f.text_field :caller_id, class: "form-control" %></div>
+    <%= f.label :receiver_id, class: "col-sm-3" %>
+    <div class="col-sm-3">
+    <%= f.text_field :receiver_id, class: "form-control" %></div>
   </div>
-  <div class="field">
-    <%= f.label :receivers_id %><br>
-    <%= f.text_field :receivers_id %>
+  <div class="form-group">
+    <%= f.label :order_id, class: "col-sm-3" %>
+    <div class="col-sm-9">
+      <%= f.number_field :order_id, class: "form-control" %></div>
   </div>
-  <div class="field">
-    <%= f.label :order_id %><br>
-    <%= f.number_field :order_id %>
+  <div class="form-group">
+    <%= f.label :call_type, class: "col-sm-3" %>
+    <div class="col-sm-3">
+      <%= f.check_box :call_type %></div>
+    <%= f.label :duration, class: "col-sm-3" %>
+    <div class="col-sm-3">
+      <%= f.number_field :duration, class: "form-control" %></div>
   </div>
-  <div class="field">
-    <%= f.label :call_type %><br>
-    <%= f.check_box :call_type %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group">
+    <%= f.submit "Create Meeting", class: "btn btn-primary" %>
   </div>
 <% end %>
