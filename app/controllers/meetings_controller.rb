@@ -21,8 +21,27 @@ class MeetingsController < ApplicationController
 		@token = capability.generate
 	end
 
-
 	def voice
+		caller_id = "+13174268213"
+		number = params[:PhoneNumber]
+		response = Twilio::TwiML::Response.new do |r|
+			# Should be your Twilio Number or a verified Caller ID
+			if /^[\d\+\-\(\) ]+$/.match(number)
+				r.Gather :numDigits => '5', :action => '/handle_calls_from_phone', :method => 'get' do |g|
+
+				end
+			else
+				r.Dial :callerId => caller_id do |d|
+					d.Client number
+				end
+			end
+		end
+		render :text => response.text
+
+	end
+
+
+	def phone_to_x 
 		caller_id = "+13174268213"
 		number = params[:PhoneNumber]
 		response = Twilio::TwiML::Response.new do |r|
