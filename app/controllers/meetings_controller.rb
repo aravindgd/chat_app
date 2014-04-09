@@ -45,7 +45,8 @@ class MeetingsController < ApplicationController
         end
       end
         render :text => response.text
-  	end
+  	end 
+    
   
   
   # GET /meetings
