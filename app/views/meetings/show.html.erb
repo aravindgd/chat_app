@@ -2,12 +2,12 @@
 
 <p>
   <strong>Callers:</strong>
-  <%= @meeting.callers %>
+  <%= @meeting.caller.name %>
 </p>
 
 <p>
   <strong>Receivers:</strong>
-  <%= @meeting.receivers %>
+  <%= @meeting.receiver.name %>
 </p>
 
 <p>
@@ -18,6 +18,12 @@
 <p>
   <strong>Call type:</strong>
   <%= @meeting.call_type %>
+</p>
+
+
+<p>
+  <strong>Call type:</strong>
+  <%= @meeting.duration %>
 </p>
 
 <%= link_to 'Edit', edit_meeting_path(@meeting) %> |

@@ -1,4 +1,4 @@
 class Meeting < ActiveRecord::Base
-  belongs_to :callers
-  belongs_to :receivers
+  belongs_to :caller
+  belongs_to :receiver
 end
