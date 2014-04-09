@@ -44,7 +44,7 @@ class MeetingsController < ApplicationController
 	def handle_calls_from_phone
 		puts params
 		Twilio::TwiML::Response.new do |r|
-			r.Dial '+13105551212' 
+			r.Dial '+13174268213' 
 			r.Say 'The call failed or the remote party hung up. Goodbye.'
 		end
 	end

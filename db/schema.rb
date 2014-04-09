@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140408143558) do
+ActiveRecord::Schema.define(version: 20140409120117) do
 
   create_table "callers", force: true do |t|
     t.string   "name"
@@ -29,6 +29,9 @@ ActiveRecord::Schema.define(version: 20140408143558) do
     t.integer  "call_type",   default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "pin"
+    t.time     "start_time"
+    t.date     "start_date"
   end
 
   add_index "meetings", ["caller_id"], name: "index_meetings_on_caller_id"
