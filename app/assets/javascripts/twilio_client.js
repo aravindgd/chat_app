@@ -1,9 +1,9 @@
 $(document).ready(function(){
+
   
   	if ($("#twilio_client_token").length > 0)
   {
 	var twilio_token = $("#twilio_client_token").data("token-id") 
-  alert(twilio_token)
   var twilio_client_name = $("#twilio_client_name").data("client-name") 
 	console.log("%%%%%%%%%%%%%%%%%%%%%%%%5")
 	console.log(twilio_token)
@@ -38,6 +38,10 @@ $(document).ready(function(){
 	});
 	/* Connect to Twilio when we call this function. */
 }
+
+$.ajaxSetup({
+    beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))}
+});
 });
 
 

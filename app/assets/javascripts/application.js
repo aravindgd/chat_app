@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require custom
 //= require turbolinks
 //= require twilio_client
 //= require jquery.timeTo
