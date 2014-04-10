@@ -28,13 +28,22 @@
 					<h4>Chat</h4>
 				</div>
 				<div class="content">
-					<input class="input-lg" id="number" name="number" placeholder="Enter a phone number or client to call" type="text">/</input>
+        <% if @receiver.call_type == "phone" %>
+					 <%= hidden_field_tag 'number', @receiver.number, :id => 'number' %>
+          <% else %>
+           <%= hidden_field_tag 'number', @receiver.name, :id => 'number' %>
+        <% end %>
+          
+          <!--  <input class="input-lg" id="number" name="number" placeholder="Enter a phone number or client to call" type="text"></input>-->
 					<br/>
 					<input class="input-lg" id="count_down_time" name="count_down_time" placeholder="Enter the number of seconds the call should last" type="hidden"></input>
 					<br/>
-					<button class="call btn-lg btn-success" onclick="twilio_client_call();">
-						Call
-					</button>
+          <% if params[:u] != "p" %>
+          <%= params[:u]%>
+  					<button class="call btn-lg btn-success" onclick="twilio_client_call();">
+  						Call
+  					</button>
+          <% end %>
 					<button class="call btn-lg btn-danger" onclick="twilio_client_hangup();">
 						Hangup
 					</button>
