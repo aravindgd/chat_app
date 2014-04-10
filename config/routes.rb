@@ -1,4 +1,21 @@
 ChatApp::Application.routes.draw do
+
+  namespace :api, defaults: { format: 'json'} do
+    namespace :v1 do
+        resources :meetings
+    end
+  end
+  resources :meetings
+
+  resources :receivers
+
+  resources :callers
+  
+  get "call" => "meetings#call"	
+  match "voice" => "meetings#voice", via: [:get, :post]
+ # match "phone_to_x" => "meetings#phone_to_x", via: [:get, :post]
+#  match "receive_call" => "meetings#receive_call", via: [:get, :post]
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

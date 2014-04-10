@@ -1,0 +1,38 @@
+<%= form_for(@meeting, html: { class: "form-horizontal" }) do |f| %>
+  <% if @meeting.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@meeting.errors.count, "error") %> prohibited this meeting from being saved:</h2>
+
+      <ul>
+      <% @meeting.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :caller_id, class: "col-sm-3" %>
+    <div class="col-sm-3">
+    <%= f.text_field :caller_id, class: "form-control" %></div>
+    <%= f.label :receiver_id, class: "col-sm-3" %>
+    <div class="col-sm-3">
+    <%= f.text_field :receiver_id, class: "form-control" %></div>
+  </div>
+  <div class="form-group">
+    <%= f.label :order_id, class: "col-sm-3" %>
+    <div class="col-sm-9">
+      <%= f.number_field :order_id, class: "form-control" %></div>
+  </div>
+  <div class="form-group">
+    <%= f.label :call_type, class: "col-sm-3" %>
+    <div class="col-sm-3">
+      <%= f.check_box :call_type %></div>
+    <%= f.label :duration, class: "col-sm-3" %>
+    <div class="col-sm-3">
+      <%= f.number_field :duration, class: "form-control" %></div>
+  </div>
+  <div class="form-group">
+    <%= f.submit "Create Meeting", class: "btn btn-primary" %>
+  </div>
+<% end %>

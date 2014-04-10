@@ -1,0 +1,32 @@
+<div class="col-md-4 col-md-offset-4">
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Callers:</strong>
+  <%= @meeting.caller.name %>
+</p>
+
+<p>
+  <strong>Receivers:</strong>
+  <%= @meeting.receiver.name %>
+</p>
+
+<p>
+  <strong>Order:</strong>
+  <%= @meeting.order_id %>
+</p>
+
+<p>
+  <strong>Call type:</strong>
+  <%= @meeting.call_type %>
+</p>
+
+
+<p>
+  <strong>Call type:</strong>
+  <%= @meeting.duration %>
+</p>
+
+<%= link_to 'Edit', edit_meeting_path(@meeting) %> |
+<%= link_to 'Back', meetings_path %>
+</div>

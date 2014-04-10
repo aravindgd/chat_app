@@ -1,0 +1,65 @@
+<div class="container">
+  <div id="button_log">
+    <div class="alert alert-info" id="log">Loading pigeons...</div>
+  </div>
+  <center>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="nav_bar_side">
+          <h4>Users</h4>
+        </div>
+        <div class="content">
+          <ul>
+            <li>
+              Status
+              <li>
+                Name
+                <li>
+                  Media  
+                </li>
+              </li>
+            </li>
+          </ul>
+          <h2>Welcome!</h2>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="nav_bar_side">
+          <h4>Chat</h4>
+        </div>
+        <div class="content">
+          <%= hidden_field_tag 'number', @receiver.number, :id => 'number' %>
+          <!--  <input class="input-lg" id="number" name="number" placeholder="Enter a phone number or client to call" type="text"></input>-->
+          <br/>
+          
+          <%= @caller.name %> <%= @receiver.name %>
+          <input class="input-lg" id="count_down_time" name="count_down_time" placeholder="Enter the number of seconds the call should last" type="hidden"></input>
+          <br/>
+          <button class="call btn-lg btn-success" onclick="twilio_client_call();">
+            Call
+          </button>
+          <button class="call btn-lg btn-danger" onclick="twilio_client_hangup();">
+            Hangup
+          </button>
+          <br/>
+          <br/>
+          <div data-token-id="<%= @token %>" id="twilio_client_token">
+            <div data-client-name="<%= @client_name %>" id="twilio_client_name">
+              <div id="countdown"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="nav_bar_side">
+          <h4>Users</h4>
+        </div>
+        <div class="content">
+          <h2>Welcome!</h2>
+        </div>
+      </div>
+    </div>
+  </center>
+</div>
