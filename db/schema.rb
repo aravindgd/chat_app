@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20140408143558) do
     t.string   "name"
     t.integer  "number"
     t.boolean  "activation", default: true
+    t.string   "call_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -26,7 +27,6 @@ ActiveRecord::Schema.define(version: 20140408143558) do
     t.integer  "receiver_id"
     t.integer  "order_id"
     t.integer  "duration"
-    t.integer  "call_type",   default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20140408143558) do
     t.string   "name"
     t.integer  "number"
     t.boolean  "activation", default: true
+    t.string   "call_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
