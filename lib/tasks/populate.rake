@@ -11,6 +11,7 @@ namespace :db do
     Caller.populate 5 do |callers|
       callers.name  = Faker::Name.first_name
       callers.number = Faker::Number.number(10)
+      callers.call_type = "browser"
       callers.caller_id = "call#{i}"
       i+=1
     end
@@ -18,6 +19,7 @@ namespace :db do
     Receiver.populate 5 do |receiver|
       receiver.name  = Faker::Name.first_name
       receiver.number = Faker::Number.number(10)
+      receiver.call_type = "phone"
       receiver.receiver_id = "call#{i}"
       i+=1
     end
