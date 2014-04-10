@@ -52,7 +52,7 @@ class MeetingsController < ApplicationController
   	end
     
     
-     def phone_to_x
+    def phone_to_x
       puts "dsddddddddddddddddddddddddin phone_to_x #{params}"
       redirect = Twilio::TwiML::Response.new do |r|
       #  r.Gather :finishOnKey => '*', :action => '/receive_call', :method => 'GET' do |g|
@@ -60,7 +60,7 @@ class MeetingsController < ApplicationController
         #  r.Say 'Thank you we are forwarding your call'
         #end
         # r.Say 'Sorry we dint receive any input thank you, have a goooooood day'
-        r.Gather :numDigits => '1', :action => '/receive_call', :method => 'get' do |g|
+        r.Gather :numDigits => '1', :action => '/make_call', :method => 'get' do |g|
             g.Say 'Press 1 to forward the call'
             g.Say 'Thank you we are forwarding your call'
         end
@@ -69,10 +69,11 @@ class MeetingsController < ApplicationController
       render :text => redirect.text
     end
     
-    def receive_call
+    def make_call
       puts "dsdddddddddddddddddddddddd receive_call#{params}"
       caller_id = "+13174268213"
       number = "919566108096"
+#      @meeting = Meeting.find_by_pin()
         response = Twilio::TwiML::Response.new do |r|
          # Should be your Twilio Number or a verified Caller ID
           r.Dial :callerId => caller_id do |d|
