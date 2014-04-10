@@ -6,7 +6,11 @@ class MeetingsController < ApplicationController
   
   	def call
       # Rails.logger.info "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$#{params[:ph_no]}"
-      @client_name = params[:client]
+      #@client_name = params[:client]
+      meeting = Meeting.find(params[:meeting_id])
+      @receiver = meeting.receiver
+      @caller = meeting.caller
+      @client_name = @caller.name
       Rails.logger.info "##########ddfdfdfdf#{@client_name}#########"
       #  Rails.logger.info "top #{@client_name}"
       if @client_name.nil?
