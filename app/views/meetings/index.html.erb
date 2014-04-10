@@ -22,8 +22,14 @@
         <!--<td><%#= meeting.call_type %></td>-->
         <td><%= meeting.duration %></td>
         <td><%= link_to 'Show', meeting, class: "btn btn-info" %></td>
+        <% if params[:caller_id] %>
         <td><%= link_to 'Call', call_path(:meeting_id => meeting.id), class: "btn btn-success" %>
-      </tr>
+          <% elsif params[:receiver_id] %>
+            <td><%= link_to 'Call', call_path(:meeting_id => meeting.id, :u => "p"), class: "btn btn-success" %></td>
+          <% else %>
+            <td></td>
+        <% end %>
+      </tr> 
     <% end %>
   </tbody>
 </table>

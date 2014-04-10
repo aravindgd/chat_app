@@ -10,12 +10,16 @@ class MeetingsController < ApplicationController
       meeting = Meeting.find(params[:meeting_id])
       @receiver = meeting.receiver
       @caller = meeting.caller
-      @client_name = @caller.name
+      if params[:u] != "p"
+        @client_name = @caller.name
+      else
+        @client_name = @receiver.name
+      end
       Rails.logger.info "##########ddfdfdfdf#{@client_name}#########"
       #  Rails.logger.info "top #{@client_name}"
-      if @client_name.nil?
-        @client_name = $default_client
-      end
+      #if @client_name.nil?
+      #  @client_name = $default_client
+      #end
       # @client_phone = params[:ph_no]
       # Find these values at twilio.com/user/account
       account_sid = 'AC1e7ff5d3ece16ab5ad2f63f7e201cb00'
@@ -60,7 +64,7 @@ class MeetingsController < ApplicationController
         #  r.Say 'Thank you we are forwarding your call'
         #end
         # r.Say 'Sorry we dint receive any input thank you, have a goooooood day'
-        r.Gather :numDigits => '1', :action => '/make_call', :method => 'get' do |g|
+        r.Gather :numDigits => '5', :action => '/make_call', :method => 'get' do |g|
             g.Say 'Press 1 to forward the call'
             g.Say 'Thank you we are forwarding your call'
         end
@@ -72,18 +76,24 @@ class MeetingsController < ApplicationController
     def make_call
       puts "dsdddddddddddddddddddddddd receive_call#{params}"
       caller_id = "+13174268213"
-      number = "919566108096"
-#      @meeting = Meeting.find_by_pin()
+     # number = "919566108096"
+      meeting = Meeting.find_by_pin(params[:Digits])
+      @caller = meeting.caller
+      @receiver = meeting.receiver
+    
         response = Twilio::TwiML::Response.new do |r|
          # Should be your Twilio Number or a verified Caller ID
           r.Dial :callerId => caller_id do |d|
           # Test to see if the PhoneNumber is a number, or a Client ID. In
           # this case, we detect a Client ID by the presence of non-numbers
           # in the PhoneNumber parameter.
-            if /^[\d\+\-\(\) ]+$/.match(number)
-                d.Number(CGI::escapeHTML number)
+            if @receiver.call_type == "phone"
+                medium = @receiver.number
+                Rails.logger.info "test the values #{medium}"
+                d.Number(CGI::escapeHTML medium.to_s)
             else
-                d.Client number
+                medium = @receiver.name
+                d.Client medium
             end
          end
       end
@@ -95,7 +105,16 @@ class MeetingsController < ApplicationController
   # GET /meetings
   # GET /meetings.json
   def index
-    @meetings = Meeting.all
+    if params[:caller_id]
+      Rails.logger.info "id forrrrrrrrrrrrrrrr caller #{params[:caller_id]}"
+     # @caller_id = params[:caller_id]
+      @meetings = Meeting.where(:caller_id => params[:caller_id])
+    elsif params[:receiver_id]
+      @receiver_id = params[:receiver_id]
+      @meetings = Meeting.where(:receiver_id => params[:receiver_id])
+    else 
+      @meetings = Meeting.all
+    end
   end
 
   # GET /meetings/1
@@ -160,6 +179,6 @@ class MeetingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def meeting_params
-      params.require(:meeting).permit(:caller_id, :receiver_id, :order_id, :call_type, :duration)
+      params.require(:meeting).permit(:caller_id, :receiver_id, :order_id, :duration, :start_time, :start_date, :pin)
     end
 end
