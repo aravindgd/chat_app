@@ -49,7 +49,45 @@ class MeetingsController < ApplicationController
         end
       end
         render :text => response.text
-  	end 
+  	end
+    
+    
+     def phone_to_x
+      puts "dsddddddddddddddddddddddddin phone_to_x #{params}"
+      redirect = Twilio::TwiML::Response.new do |r|
+      #  r.Gather :finishOnKey => '*', :action => '/receive_call', :method => 'GET' do |g|
+       #   r.Say 'Enter the pin and press star to talk with another person'
+        #  r.Say 'Thank you we are forwarding your call'
+        #end
+        # r.Say 'Sorry we dint receive any input thank you, have a goooooood day'
+        r.Gather :numDigits => '1', :action => '/receive_call', :method => 'get' do |g|
+            g.Say 'Press 1 to forward the call'
+            g.Say 'Thank you we are forwarding your call'
+        end
+        r.Say 'Sorry we dint receive any input thank you, have a goooooood day'
+     end
+      render :text => redirect.text
+    end
+    
+    def receive_call
+      puts "dsdddddddddddddddddddddddd receive_call#{params}"
+      caller_id = "+13174268213"
+      number = "919566108096"
+        response = Twilio::TwiML::Response.new do |r|
+         # Should be your Twilio Number or a verified Caller ID
+          r.Dial :callerId => caller_id do |d|
+          # Test to see if the PhoneNumber is a number, or a Client ID. In
+          # this case, we detect a Client ID by the presence of non-numbers
+          # in the PhoneNumber parameter.
+            if /^[\d\+\-\(\) ]+$/.match(number)
+                d.Number(CGI::escapeHTML number)
+            else
+                d.Client number
+            end
+         end
+      end
+      render :text => response.text
+    end    
     
   
   

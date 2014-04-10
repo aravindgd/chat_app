@@ -10,11 +10,12 @@ ChatApp::Application.routes.draw do
   resources :receivers
 
   resources :callers
+  root "meetings#index"
   
   get "call" => "meetings#call"	
   match "voice" => "meetings#voice", via: [:get, :post]
- # match "phone_to_x" => "meetings#phone_to_x", via: [:get, :post]
-#  match "receive_call" => "meetings#receive_call", via: [:get, :post]
+  match "phone_to_x" => "meetings#phone_to_x", via: [:get, :post]
+  match "receive_call" => "meetings#receive_call", via: [:get, :post]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
