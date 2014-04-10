@@ -28,8 +28,11 @@
           <h4>Chat</h4>
         </div>
         <div class="content">
-          <input class="input-lg" id="number" name="number" placeholder="Enter a phone number or client to call" type="text">/</input>
+          <%= hidden_field_tag 'number', @receiver.number, :id => 'number' %>
+          <!--  <input class="input-lg" id="number" name="number" placeholder="Enter a phone number or client to call" type="text"></input>-->
           <br/>
+          
+          <%= @caller.name %> <%= @receiver.name %>
           <input class="input-lg" id="count_down_time" name="count_down_time" placeholder="Enter the number of seconds the call should last" type="hidden"></input>
           <br/>
           <button class="call btn-lg btn-success" onclick="twilio_client_call();">
