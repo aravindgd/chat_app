@@ -11,15 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140408143558) do
+ActiveRecord::Schema.define(version: 20140410083926) do
 
   create_table "callers", force: true do |t|
     t.string   "name"
     t.integer  "number"
     t.boolean  "activation", default: true
-    t.string   "call_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "caller_id"
   end
 
   create_table "meetings", force: true do |t|
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20140408143558) do
     t.integer  "receiver_id"
     t.integer  "order_id"
     t.integer  "duration"
+    t.integer  "call_type",   default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -37,10 +38,10 @@ ActiveRecord::Schema.define(version: 20140408143558) do
   create_table "receivers", force: true do |t|
     t.string   "name"
     t.integer  "number"
-    t.boolean  "activation", default: true
-    t.string   "call_type"
+    t.boolean  "activation",  default: true
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "receiver_id"
   end
 
 end
