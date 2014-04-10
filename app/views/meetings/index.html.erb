@@ -16,8 +16,8 @@
   <tbody>
     <% @meetings.each do |meeting| %>
       <tr>
-        <td><%= meeting.caller.name %></td>
-        <td><%= meeting.receiver.name %></td>
+        <td><%= meeting.caller.name if meeting.caller %></td>
+        <td><%= meeting.receiver.name if meeting.caller %></td>
         <td><%= meeting.order_id %></td>
         <td><%= meeting.call_type %></td>
         <td><%= meeting.duration %></td>
