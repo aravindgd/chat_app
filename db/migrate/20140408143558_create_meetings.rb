@@ -5,8 +5,6 @@ class CreateMeetings < ActiveRecord::Migration
       t.references :receiver, index: true
       t.integer :order_id
       t.integer :duration
-      t.integer :call_type, default: 0
-
       t.timestamps
     end
   end

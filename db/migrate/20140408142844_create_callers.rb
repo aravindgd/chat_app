@@ -4,7 +4,7 @@ class CreateCallers < ActiveRecord::Migration
       t.string :name
       t.integer :number
       t.boolean :activation, default: true
-
+      t.string :call_type
       t.timestamps
     end
   end

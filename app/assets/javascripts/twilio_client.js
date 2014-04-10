@@ -31,9 +31,9 @@ $(document).ready(function(){
         $( ".nav_bar_side" ).css( "background-image", "linear-gradient(to bottom,#47a447 0,#47a447 100%)" );
         }
     // accept the incoming connection and start two-way audio
-      conn.accept(function(){
-     // $( ".nav_bar_side" ).css( "background-image", "linear-gradient(to bottom,#428bca 0,#357ebd 100%)" );
-      });
+     // conn.accept(function(){
+    // $( ".nav_bar_side" ).css( "background-image", "linear-gradient(to bottom,#428bca 0,#357ebd 100%)" );
+    // });
       conn.accept();
 	});
 	/* Connect to Twilio when we call this function. */
