@@ -30,6 +30,11 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+group :development do
+  gem 'faker'
+  gem 'populator'
+end
+
 #twilio api
 require 'twilio-ruby'
 
