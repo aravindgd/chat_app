@@ -2,6 +2,7 @@ module Api
   module V1
     class MeetingsController < ApplicationController
       skip_before_filter  :verify_authenticity_token
+      before_filter :restrict_access
 
       respond_to :json
 
@@ -20,8 +21,7 @@ module Api
         respond_with Meeting.create(caller_id: @caller.id,
                                     receiver_id: @receiver.id,
                                     duration: meeting_params[:duration],
-                                    order_id: meeting_params[:order_id],
-                                    call_type: meeting_params[:call_type])
+                                    order_id: meeting_params[:order_id])
 
         #respond_to do |format|
           #if @meeting.save
@@ -46,6 +46,12 @@ module Api
 
       def receiver_params
         params.require(:receiver).permit(:receiver_id, :name, :number)
+      end
+
+      def restrict_access
+        authenticate_or_request_with_http_token do |token, options|
+          ApiKey.exists?(access_token: token)
+        end
       end
 
     end

@@ -11,12 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140409120117) do
+ActiveRecord::Schema.define(version: 20140411095013) do
+
+  create_table "api_keys", force: true do |t|
+    t.string   "access_token"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "callers", force: true do |t|
     t.string   "name"
     t.integer  "number"
     t.boolean  "activation", default: true
+    t.string   "call_type"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "caller_id"
@@ -27,7 +34,6 @@ ActiveRecord::Schema.define(version: 20140409120117) do
     t.integer  "receiver_id"
     t.integer  "order_id"
     t.integer  "duration"
-    t.integer  "call_type",   default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "pin"
@@ -42,6 +48,7 @@ ActiveRecord::Schema.define(version: 20140409120117) do
     t.string   "name"
     t.integer  "number"
     t.boolean  "activation",  default: true
+    t.string   "call_type"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "receiver_id"
