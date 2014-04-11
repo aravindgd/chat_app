@@ -6,7 +6,7 @@ set :repo_url, 'git@github.com:aravindgd/chat_app.git'
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
-set :deploy_to, 'home/deployer/apps/chat_app'
+set :deploy_to, '/home/deployer/apps/chat_app'
 
 set :scm, :git
 set :deploy_via, :remote_cache
