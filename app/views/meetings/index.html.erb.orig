@@ -23,11 +23,18 @@
   <tbody>
     <% @meetings.each do |meeting| %>
       <tr>
+<<<<<<< HEAD
+        <td><%= meeting.caller.name if meeting.caller %></td>
+        <td><%= meeting.receiver.name if meeting.caller %></td>
+        <td><%= meeting.order_id %></td>
+        <!--<td><%#= meeting.call_type %></td>-->
+=======
         <td><%= meeting.order_id %></td>
         <td><%= meeting.caller.name %></td>
         <td><%= meeting.receiver.name %></td>
         <td><%= meeting.caller.call_type %> to <%= meeting.receiver.call_type %></td>
         <td><%= meeting.start_time.to_formatted_s(:time)%> <%= meeting.start_date.to_formatted_s(:long) %></td>
+>>>>>>> 0c3bf23d986fe1bbf2eb16a00aed746eefcd8d47
         <td><%= meeting.duration %></td>
         <td><%= link_to 'Show', meeting, class: "btn btn-info" %></td>
         <% if params[:caller_id] %>

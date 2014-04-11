@@ -134,8 +134,12 @@ DEPENDENCIES
   faker
   jbuilder (~> 1.2)
   jquery-rails
-  populator
+<<<<<<< HEAD
   rails (= 4.1.0)
+=======
+  populator
+  rails (= 4.1.0.rc1)
+>>>>>>> develop
   sass-rails (~> 4.0.2)
   sdoc
   sqlite3

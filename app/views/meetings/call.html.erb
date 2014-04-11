@@ -4,7 +4,7 @@
   </div>
   <center>
     <div class="row">
-      <div class="col-md-4">
+      <!-- <div class="col-md-4">
         <div class="nav_bar_side">
           <h4>Users</h4>
         </div>
@@ -22,17 +22,60 @@
           </ul>
           <h2>Welcome!</h2>
         </div>
-      </div>
-      <div class="col-md-8">
+      </div> -->
+      <div class="col-md-12">
         <div class="nav_bar_side">
           <h4>Chat</h4>
         </div>
         <div class="content">
-          <%= hidden_field_tag 'number', @receiver.number, :id => 'number' %>
+           <% if @receiver.call_type == "phone" %>
+			<%= hidden_field_tag 'number', @receiver.number, :id => 'number' %>
+          <% else %>
+           	<%= hidden_field_tag 'number', @receiver.name, :id => 'number' %>
+         <% end %>
           <!--  <input class="input-lg" id="number" name="number" placeholder="Enter a phone number or client to call" type="text"></input>-->
           <br/>
+          <div class="col-md-4 caller-side">
+            <!-- <h3>Caller</h3> -->
+            <img src="/assets/user.png"/><br/>
+          <%= @caller.name %><br/>
+          <%= @caller.number %><br/>
           
-          <%= @caller.name %> <%= @receiver.name %>
+          </div>
+          <div class="col-md-3">
+
+           <div id="fountainG">
+           <div id="fountainG_1" class="fountainG">
+           </div>
+           <div id="fountainG_2" class="fountainG">
+           </div>
+           <div id="fountainG_3" class="fountainG">
+           </div>
+           <div id="fountainG_4" class="fountainG">
+           </div>
+           <div id="fountainG_5" class="fountainG">
+           </div>
+           <div id="fountainG_6" class="fountainG">
+           </div>
+           <div id="fountainG_7" class="fountainG">
+           </div>
+           <div id="fountainG_8" class="fountainG">
+           </div>
+           </div>
+
+           <div id="escapingBallG">
+           <div id="escapingBall_1" class="escapingBallG">
+           </div>
+           </div>
+          </div>
+          <div class="col-md-4">
+            <!-- <h3>Receiver</h3> -->
+            <img src="/assets/user.png"/><br/>
+          <%= @receiver.name %><br/>
+          <%= @receiver.number %><br/>
+          
+          </div>
+
           <input class="input-lg" id="count_down_time" name="count_down_time" placeholder="Enter the number of seconds the call should last" type="hidden"></input>
           <br/>
           <button class="call btn-lg btn-success" onclick="twilio_client_call();">
@@ -51,7 +94,7 @@
         </div>
       </div>
     </div>
-    <div class="row">
+   <!--  <div class="row">
       <div class="col-md-4">
         <div class="nav_bar_side">
           <h4>Users</h4>
@@ -60,6 +103,6 @@
           <h2>Welcome!</h2>
         </div>
       </div>
-    </div>
+    </div> -->
   </center>
 </div>
