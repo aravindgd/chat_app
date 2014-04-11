@@ -69,6 +69,6 @@ class CallersController < ApplicationController
 
 	# Never trust parameters from the scary internet, only allow the white list through.
 	def caller_params
-		params.require(:caller).permit(:name, :number, :activation)
+		params.require(:caller).permit(:name, :number, :activation, :call_type)
 	end
 end

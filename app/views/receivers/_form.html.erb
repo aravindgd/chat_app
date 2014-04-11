@@ -22,6 +22,12 @@
     <%= f.number_field :number, class: "form-control" %></div>
   </div>
   <div class="form-group">
+    <%= f.label :call_type, class: "col-sm-3" %>
+    <div class="col-sm-9">
+      <%= f.text_field :call_type, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
     <%= f.label :activation, class: "col-sm-3" %>
     <div class="col-sm-2"><%= f.check_box :activation %></div>
     <%= f.submit "Create Reciever", class: "btn btn-success"%>
