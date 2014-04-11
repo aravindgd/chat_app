@@ -1,6 +1,8 @@
 <div class="container">
   <div id="button_log">
-    <div class="alert alert-info" id="log">Loading pigeons...</div>
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <div class="alert alert-info" id="log">Loading pigeons...
+  </div>
   </div>
   <center>
     <div class="row">
@@ -27,16 +29,19 @@
         <div class="nav_bar_side">
           <h4>Chat</h4>
         </div>
-        <div class="content">
-          <%= hidden_field_tag 'number', @receiver.number, :id => 'number' %>
-          <!--  <input class="input-lg" id="number" name="number" placeholder="Enter a phone number or client to call" type="text"></input>-->
-          <br/>
-          <div class="col-md-4 caller-side">
-            <!-- <h3>Caller</h3> -->
-            <img src="/assets/user.png"/><br/>
-          <%= @caller.name %><br/>
-          <%= @caller.number %><br/>
-          
+        <div class="col-md-12">
+        <div class="col-md-4 caller-side">
+            <!-- <h5><strong>Caller</strong></h5> -->
+            <img src="/assets/user_show.png"/><br/><br/>
+            <table><body>
+          <tr>
+            <td><strong>Caller Name : </strong></td><td> <%= @caller.name %></td>
+          </tr>
+         <!--  <tr>
+            <td><strong>Number : </strong></td><td><%#= @caller.number %></td>
+          </tr> -->
+        </body>
+          </table>
           </div>
           <div class="col-md-3">
 
@@ -59,25 +64,41 @@
            </div>
            </div>
 
-           <div id="escapingBallG">
-           <div id="escapingBall_1" class="escapingBallG">
+           
+           <div id="movingBallG">
+           <div class="movingBallLineG">
+           </div>
+           <div id="movingBallG_1" class="movingBallG">
            </div>
            </div>
           </div>
           <div class="col-md-4">
-            <!-- <h3>Receiver</h3> -->
-            <img src="/assets/user.png"/><br/>
-          <%= @receiver.name %><br/>
-          <%= @receiver.number %><br/>
+            <!-- <h5><strong>Receiver</strong></h5> -->
+            <img src="/assets/user_show.png"/><br/><br/>
           
+          <table><body>
+          <tr>
+            <td><strong>Receiver Name : </strong></td><td> <%= @receiver.name %></td>
+          </tr>
+          <!-- <tr>
+            <td><strong>Number : </strong></td><td><%#= @receiver.number %></td>
+          </tr> -->
+          </body>
+          </table>
           </div>
+          </div>
+
+        <div class="content">
+          <%= hidden_field_tag 'number', @receiver.number, :id => 'number' %>
+          <!--  <input class="input-lg" id="number" name="number" placeholder="Enter a phone number or client to call" type="text"></input>-->
+          <br/>
 
           <input class="input-lg" id="count_down_time" name="count_down_time" placeholder="Enter the number of seconds the call should last" type="hidden"></input>
           <br/>
-          <button class="call btn-lg btn-success" onclick="twilio_client_call();">
+          <button class="call btn btn-success" onclick="twilio_client_call();">
             Call
           </button>
-          <button class="call btn-lg btn-danger" onclick="twilio_client_hangup();">
+          <button class="call btn btn-danger" onclick="twilio_client_hangup();">
             Hangup
           </button>
           <br/>

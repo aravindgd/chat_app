@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
   $("#fountainG").hide();
-  $("#escapingBallG").hide();
+  $("#movingBallG").hide();
 
   	if ($("#twilio_client_token").length > 0)
   {
@@ -21,13 +21,13 @@ $(document).ready(function(){
 	});
 	Twilio.Device.connect(function (conn) {
 		$("#log").text("Successfully established call");
-		$("#escapingBallG").show();
+		$("#movingBallG").show();
 		$("#fountainG").hide();
 	});
 	Twilio.Device.disconnect(function (conn) {
 		$("#log").text("Call ended");
 		$("#fountainG").hide();
-		 $("#escapingBallG").hide();
+		 $("#movingBallG").hide();
 	});
 	
 	Twilio.Device.incoming(function (conn) {
@@ -62,6 +62,7 @@ function twilio_client_call() {
 	var count_down_time = $('#count_down_time').val();
 	console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%555")
 	console.log(count_down_time)
+	
 	$("#fountainG").show();
 	$('#countdown').timeTo({
 		seconds: 100,
