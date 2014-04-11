@@ -1,5 +1,11 @@
 <div class="col-md-6 col-md-offset-3">
-  <h1>Listing meetings</h1>
+  <% if @caller.present? %>
+    <h1>Welcome, <%= @caller.name %></h1>
+  <% elsif @receiver.present? %>
+    <h1>Welcome, <%= @receiver.name %>
+  <% else %>
+    <h1>Listing meetings</h1>
+  <% end %>
 
 <table>
   <thead>
