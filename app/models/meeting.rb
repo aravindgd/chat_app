@@ -1,7 +1,8 @@
 class Meeting < ActiveRecord::Base
-  belongs_to :caller
-  belongs_to :receiver
-	after_create :create_pin
+  belongs_to :caller, dependent: :destroy
+  belongs_to :receiver, dependent: :destroy
+  attr_accessor :call_type
+ 	after_create :create_pin
 	def create_pin
 		puts "***************************"
 		puts "#{self.caller.id}"
