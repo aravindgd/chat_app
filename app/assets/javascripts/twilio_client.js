@@ -1,4 +1,4 @@
-$(document).ready(function(){
+read = function(){
 
   
   	if ($("#twilio_client_token").length > 0)
@@ -38,11 +38,10 @@ $(document).ready(function(){
 	});
 	/* Connect to Twilio when we call this function. */
 }
+}
 
-$.ajaxSetup({
-    beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))}
-});
-});
+$(document).ready(read);
+$(document).on('page:load', read);
 
 
 function twilio_client_call() {

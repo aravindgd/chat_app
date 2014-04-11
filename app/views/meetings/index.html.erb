@@ -1,5 +1,11 @@
 <div class="col-md-6 col-md-offset-3">
-  <h1>Your Session list</h1>
+  <% if @caller.present? %>
+    <h1>Welcome, <%= @caller.name %></h1>
+  <% elsif @receiver.present? %>
+    <h1>Welcome, <%= @receiver.name %>
+  <% else %>
+    <h1>Listing meetings</h1>
+  <% end %>
 
 <table>
   <thead>
@@ -23,7 +29,7 @@
         <% if params[:caller_id] %>
         <td><%= link_to 'Call', call_path(:meeting_id => meeting.id), class: "btn btn-success" %>
           <% elsif params[:receiver_id] %>
-            <td><%= link_to 'Call', call_path(:meeting_id => meeting.id, :u => "p"), class: "btn btn-success", :method => :post %></td>
+            <td><%= link_to 'Call', call_path(:meeting_id => meeting.id, :u => "p"), class: "btn btn-success" %></td>
           <% else %>
             <td></td>
         <% end %>

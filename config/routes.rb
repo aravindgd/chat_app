@@ -12,7 +12,7 @@ ChatApp::Application.routes.draw do
   resources :callers
   root "meetings#index"
   
-  get "call" => "meetings#call"	
+  match "call" => "meetings#call", via: [:get, :post]	
   match "voice" => "meetings#voice", via: [:get, :post]
   match "phone_to_x" => "meetings#phone_to_x", via: [:get, :post]
   match "make_call" => "meetings#make_call", via: [:get, :post]
