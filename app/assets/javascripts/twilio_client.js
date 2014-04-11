@@ -1,6 +1,4 @@
 $(document).ready(function(){
-
-
 	if ($("#twilio_client_token").length > 0)
 		{
 			var twilio_token = $("#twilio_client_token").data("token-id") 
@@ -18,18 +16,19 @@ $(document).ready(function(){
 				$("#log").text("Error: " + error.message);
 			});
 			Twilio.Device.connect(function (conn) {
-				$("#log").text("Successfully established call");
-				$('#countdown').timeTo({
-					seconds: 100,
-					countdown: true
-				},function(){ 
-					twilio_client_hangup();
+				$("#log").text("Successfully established call");	
+				$("#countdown").TimeCircles({ time: { Days: { show:false }, Hours: { show:false }, Minutes: { color: '#4D8DC1' }, Seconds: { color: '#4D8DC1' } } }).addListener(function(unit,value,total) { 
+					if (total == 10) { 
+						idle_timer.TimeCircles({ time: { Days: { show:false }, Hours: { show:false }, Minutes: { color: '#900' }, Seconds: { color: '#900' } } })
+					} else if (total == 0) { 
+						twilio_client_hangup()
+					} 
 				});
 
 			});
 			Twilio.Device.disconnect(function (conn) {
 				$("#log").text("Call ended");
-				$("#countdown").timeTo("stop");
+				$("#countdown.stopwatch").TimeCircles().stop(); 
 			});
 			Twilio.Device.incoming(function (conn) {
 				$("#log").text("Incoming connection from " + conn.parameters.From);
@@ -45,6 +44,7 @@ $(document).ready(function(){
 				conn.accept();
 			});
 			/* Connect to Twilio when we call this function. */
+
 		}
 
 		$.ajaxSetup({
@@ -52,15 +52,25 @@ $(document).ready(function(){
 		});
 });
 
+function extend_call()
+{	
+	if (($("#extend-time").val())!=null || ($("#extend-time").val())!=0)
+		{
+			console.log("###################################3")
+			current_time = $("#countdown").TimeCircles().getTime();
+			console.log(current_time);
+			extended_time = parseInt(current_time) + parseInt($("#extend-time").val());
+			console.log(extended_time)
+			$("#countdown.stopwatch").data("timer",extended_time);
+			$("#countdown.stopwatch").TimeCircles().rebuild();
+		}	
+}
 
 function twilio_client_call() {
 	// get the phone number or client to connect the call to
 	//alert($("#number").val())
 	params = {"PhoneNumber": $("#number").val()};
 	Twilio.Device.connect(params);
-	var count_down_time = $('#count_down_time').val();
-	console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%555")
-	console.log(count_down_time)
 }
 function twilio_client_hangup() {
 	Twilio.Device.disconnectAll();

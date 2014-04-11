@@ -30,11 +30,16 @@
 				<div class="content">
 					<input class="input-lg" id="number" name="number" placeholder="Enter a phone number or client to call" type="text">/</input>
 					<br/>
-					<input class="input-lg" id="count_down_time" name="count_down_time" placeholder="Enter the number of seconds the call should last" type="hidden"></input>
+					<input class="input-lg"  id="extend-time" placeholder="Enter the number of seconds you want to increase the call by" type="text">/</input>
 					<br/>
+					<button class="call btn-lg btn-success" onclick="extend_call();">
+					<br/>
+					<br/>
+					
 					<button class="call btn-lg btn-success" onclick="twilio_client_call();">
 						Call
 					</button>
+
 					<button class="call btn-lg btn-danger" onclick="twilio_client_hangup();">
 						Hangup
 					</button>
@@ -42,7 +47,7 @@
 					<br/>
 					<div data-token-id="<%= @token %>" id="twilio_client_token">
 						<div data-client-name="<%= @client_name %>" id="twilio_client_name">
-							<div id="countdown"></div>
+							<div id="countdown" class="stopwatch" data-timer="10000"></div>
 						</div>
 					</div>
 				</div>
