@@ -1,6 +1,4 @@
 read = function(){
-
-  
   	if ($("#twilio_client_token").length > 0)
   {
 	var twilio_token = $("#twilio_client_token").data("token-id") 
