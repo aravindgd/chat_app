@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140411095013) do
+ActiveRecord::Schema.define(version: 20140411134203) do
 
   create_table "api_keys", force: true do |t|
     t.string   "access_token"
@@ -27,7 +27,10 @@ ActiveRecord::Schema.define(version: 20140411095013) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "caller_id"
+    t.integer  "user_id"
   end
+
+  add_index "callers", ["user_id"], name: "index_callers_on_user_id"
 
   create_table "meetings", force: true do |t|
     t.integer  "caller_id"
@@ -52,6 +55,16 @@ ActiveRecord::Schema.define(version: 20140411095013) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "receiver_id"
+    t.integer  "user_id"
+  end
+
+  add_index "receivers", ["user_id"], name: "index_receivers_on_user_id"
+
+  create_table "users", force: true do |t|
+    t.string   "external_caller_id"
+    t.string   "external_receiver_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

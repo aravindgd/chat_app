@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>External caller:</strong>
+  <%= @user.external_caller_id %>
+</p>
+
+<p>
+  <strong>External receiver:</strong>
+  <%= @user.external_receiver_id %>
+</p>
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
