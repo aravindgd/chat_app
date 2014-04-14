@@ -9,9 +9,9 @@ class MeetingsController < ApplicationController
   def call
     # Rails.logger.info "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$#{params[:ph_no]}"
     #@client_name = params[:client]
-    meeting = Meeting.find(params[:meeting_id])
-    @receiver = meeting.receiver
-    @caller = meeting.caller
+    @meeting = Meeting.find(params[:meeting_id])
+    @receiver = @meeting.receiver
+    @caller = @meeting.caller
     if params[:u] != "p"
       @client_name = @caller.name
     else

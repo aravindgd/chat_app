@@ -30,7 +30,12 @@
 				<div class="content">
 					<input class="input-lg" id="number" name="number" placeholder="Enter a phone number or client to call" type="text">/</input>
 					<br/>
-					<input class="input-lg" id="count_down_time" name="count_down_time" placeholder="Enter the number of seconds the call should last" type="hidden"></input>
+					<div id="count_down_time" data-time-extension=<%="#{@meeting.duration}"%>></input>
+					<input class="input-lg" id="time_extension_text_box" placeholder="Enter the number of seconds the call should be extended" type="text"></input>
+					<br/>
+					<button class="call btn-lg btn-success" onclick="extend_call();">
+						Extend Time
+						</button>
 					<br/>
 					<button class="call btn-lg btn-success" onclick="twilio_client_call();">
 						Call
@@ -40,7 +45,7 @@
 					</button>
 					<br/>
 					<br/>
-					<div data-time-extension="" id="time_extension">
+					<div data-time-extension="0" id="time_extension">
 					<div data-token-id="<%= @token %>" id="twilio_client_token">
 						<div data-client-name="<%= @client_name %>" id="twilio_client_name">
 							<div id="countdown"></div>
