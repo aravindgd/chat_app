@@ -1,6 +1,6 @@
 class Meeting < ActiveRecord::Base
-  belongs_to :caller, dependent: :destroy
-  belongs_to :receiver, dependent: :destroy
+  belongs_to :caller, class_name: "User", foreign_key: "caller_id"
+  belongs_to :receiver, class_name: "User", foreign_key: "receiver_id"
   attr_accessor :call_type
  	after_create :create_pin
 	def create_pin
