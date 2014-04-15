@@ -1,5 +1,7 @@
 ChatApp::Application.routes.draw do
 
+  resources :api_keys
+
   resources :users
 
   namespace :api, defaults: { format: 'json'} do
@@ -8,7 +10,7 @@ ChatApp::Application.routes.draw do
     end
   end
   resources :meetings
-  root "meetings#index"
+  root "api_keys#index"
   
   match "call" => "meetings#call", via: [:get, :post]	
   match "voice" => "meetings#voice", via: [:get, :post]

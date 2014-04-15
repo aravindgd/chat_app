@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140411134115) do
+ActiveRecord::Schema.define(version: 20140415081921) do
 
   create_table "api_keys", force: true do |t|
     t.string   "access_token"
+    t.string   "app_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -22,6 +23,7 @@ ActiveRecord::Schema.define(version: 20140411134115) do
   create_table "meetings", force: true do |t|
     t.integer  "caller_id"
     t.integer  "receiver_id"
+    t.integer  "api_key_id"
     t.integer  "order_id"
     t.integer  "duration"
     t.datetime "created_at"
@@ -31,6 +33,7 @@ ActiveRecord::Schema.define(version: 20140411134115) do
     t.date     "start_date"
   end
 
+  add_index "meetings", ["api_key_id"], name: "index_meetings_on_api_key_id"
   add_index "meetings", ["caller_id"], name: "index_meetings_on_caller_id"
   add_index "meetings", ["receiver_id"], name: "index_meetings_on_receiver_id"
 
@@ -38,8 +41,11 @@ ActiveRecord::Schema.define(version: 20140411134115) do
     t.string   "uniq_id"
     t.string   "name"
     t.integer  "number"
+    t.integer  "api_key_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "users", ["api_key_id"], name: "index_users_on_api_key_id"
 
 end

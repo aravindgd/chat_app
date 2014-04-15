@@ -4,6 +4,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :uniq_id
       t.string :name
       t.integer :number
+      t.references :api_key, index: true
 
       t.timestamps
     end
