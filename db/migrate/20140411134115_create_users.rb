@@ -1,8 +1,9 @@
 class CreateUsers < ActiveRecord::Migration
   def change
     create_table :users do |t|
-      t.string :external_caller_id
-      t.string :external_receiver_id
+      t.string :uniq_id
+      t.string :name
+      t.integer :number
 
       t.timestamps
     end

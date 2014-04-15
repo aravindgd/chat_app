@@ -13,45 +13,39 @@ module Api
 				Rails.logger.info "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$#{receiver_params}"
 				Rails.logger.info "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$#{user_params}"
 
-				user_caller = User.find_by(external_caller_id: params[:user][:uid_caller])
-
-				if user_caller 
-					caller_obj = user_caller.caller
+				if caller_obj = User.find_by(uniq_id: params[:user][:uid_caller])
+					Rails.logger.info "caller user already present"
 				else
-					user_caller = User.create(external_caller_id: params[:user][:uid_caller])
-					caller_obj = user_caller.build_caller(caller_params)
-					caller_obj.save!
+					caller_obj = User.create(uniq_id: params[:user][:uid_caller],
+                                   name: params[:caller][:name],
+                                   number: params[:caller][:number])
 				end
 				
-				user_receiver = User.find_by(external_receiver_id: params[:user][:uid_receiver])
-
-				if user_receiver
-					receiver = user_receiver.receiver
+				if receiver_obj = User.find_by(uniq_id: params[:user][:uid_receiver])
 					Rails.logger.info "receiver user already present"
-					Rails.logger.info receiver
 				else
-					user_receiver = User.create(external_receiver_id: params[:user][:uid_receiver])
-					receiver = user_receiver.build_receiver(receiver_params)
-					receiver.saved!
+					receiver_obj = User.create(uniq_id: params[:user][:uid_receiver],
+                                     name: params[:receiver][:name],
+                                     number: params[:receiver][:number])
 				end
 
 				Rails.logger.info "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$#{@meeting_param}"
 				Rails.logger.info "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$asdasdasdasdasdasd1@@@@@@"
 
-				Rails.logger.info user_caller
-				Rails.logger.info user_caller.id
-				Rails.logger.info user_caller.caller
-				Rails.logger.info user_receiver
-				Rails.logger.info user_receiver.id
-				Rails.logger.info user_receiver.receiver
+				#Rails.logger.info user_caller
+				#Rails.logger.info user_caller.id
+				#Rails.logger.info user_caller.caller
+				#Rails.logger.info user_receiver
+				#Rails.logger.info user_receiver.id
+				#Rails.logger.info user_receiver.receiver
 
 				meeting = Meeting.create(caller_id: caller_obj.id,
-																		receiver_id: receiver.id,
+																		receiver_id: receiver_obj.id,
 																		duration: meeting_params[:duration],
 																		order_id: meeting_params[:order_id])
 
-				encrypted_caller_id = VERIFIER.generate(user_receiver.external_receiver_id)
-				encrypted_receiver_id = VERIFIER.generate(user_caller.external_caller_id)
+				encrypted_caller_id = VERIFIER.generate(caller_obj.uniq_id)
+				encrypted_receiver_id = VERIFIER.generate(receiver_obj.uniq_id)
 
 				return_array= {"meeting_id" => meeting.id,"encrypted_caller_id" => encrypted_caller_id,"encrypted_receiver_id" => encrypted_receiver_id}
 

@@ -8,10 +8,6 @@ ChatApp::Application.routes.draw do
     end
   end
   resources :meetings
-
-  resources :receivers
-
-  resources :callers
   root "meetings#index"
   
   match "call" => "meetings#call", via: [:get, :post]	

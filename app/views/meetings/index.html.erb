@@ -1,8 +1,6 @@
 <div class="col-md-6 col-md-offset-3">
-  <% if @caller.present? %>
-    <h1>Welcome, <%= @caller.name %></h1>
-  <% elsif @receiver.present? %>
-    <h1>Welcome, <%= @receiver.name %>
+  <% if @user.present? %>
+    <h1>Welcome, <%= @user.name %></h1>
   <% else %>
     <h1>Listing meetings</h1>
   <% end %>
@@ -13,7 +11,7 @@
       <th>Order</th>
       <th>Caller</th>
       <th>Receiver</th>
-      <th>Call Type</th>
+      <%#<th>Call Type</th>%>
       <th>Starts At</th>
       <th>Duration</th>
       <th colspan="3"></th>
@@ -26,7 +24,7 @@
         <td><%= meeting.order_id %></td>
         <td><%= meeting.caller.name %></td>
         <td><%= meeting.receiver.name %></td>
-        <td><%= meeting.caller.call_type %> to <%= meeting.receiver.call_type %></td>
+        <!--td><%#= meeting.caller.call_type  to <%= meeting.receiver.call_type %></td>--%>
         <td><%= meeting.start_time.to_formatted_s(:time)%> <%= meeting.start_date.to_formatted_s(:long) %></td>
         <td><%= meeting.duration %></td>
         <td><%= link_to 'Show', meeting, class: "btn btn-info" %></td>

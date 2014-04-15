@@ -108,12 +108,9 @@ class MeetingsController < ApplicationController
   # GET /meetings.json
   def index
     if params.present?
-      if params[:caller_id].present?
-        @caller = Caller.find_by(caller_id: params[:caller_id])
-        @meetings = @caller.meetings
-      elsif params[:receiver_id].present?
-        @receiver = Receiver.find_by(receiver_id: params[:receiver_id])
-        @meetings = @receiver.meetings
+      if params[:uid].present?
+        @user = User.find_by(uniq_id: params[:uid])
+        @meetings = @user.meetings
       else
         @meetings = Meeting.all
       end
@@ -184,6 +181,6 @@ class MeetingsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def meeting_params
-    params.require(:meeting).permit(:caller_id, :receiver_id, :order_id, :call_type, :duration)
+    params.require(:meeting).permit(:caller_id, :receiver_id, :order_id, :call_type, :duration, :uid)
   end
 end
