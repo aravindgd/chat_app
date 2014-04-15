@@ -38,11 +38,16 @@ module Api
 				#Rails.logger.info user_receiver
 				#Rails.logger.info user_receiver.id
 				#Rails.logger.info user_receiver.receiver
+        
+        start_time = params[:meeting][:start_at].to_time
 
 				meeting = Meeting.create(caller_id: caller_obj.id,
 																		receiver_id: receiver_obj.id,
 																		duration: meeting_params[:duration],
-																		order_id: meeting_params[:order_id])
+																		order_id: meeting_params[:order_id],
+                                    start_time: start_time,
+                                    start_date: start_time
+                                    )
 
 				encrypted_caller_id = VERIFIER.generate(caller_obj.uniq_id)
 				encrypted_receiver_id = VERIFIER.generate(receiver_obj.uniq_id)
@@ -66,7 +71,7 @@ module Api
 			private
 
 			def meeting_params
-				params.require(:meeting).permit(:order_id, :call_type, :duration)
+				params.require(:meeting).permit(:order_id, :call_type, :duration, :start_at)
 			end
 
 			def caller_params
