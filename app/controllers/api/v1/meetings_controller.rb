@@ -50,8 +50,8 @@ module Api
 																		duration: meeting_params[:duration],
 																		order_id: meeting_params[:order_id])
 
-				encrypted_caller_id = VERIFIER.generate(user_receiver.external_receiver_id)
-				encrypted_receiver_id = VERIFIER.generate(user_caller.external_caller_id)
+				encrypted_receiver_id = VERIFIER.generate(user_receiver.external_receiver_id)
+				encrypted_caller_id = VERIFIER.generate(user_caller.external_caller_id)
 
 				return_array= {"meeting_id" => meeting.id,"encrypted_caller_id" => encrypted_caller_id,"encrypted_receiver_id" => encrypted_receiver_id}
 
