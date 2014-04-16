@@ -13,12 +13,18 @@ module Api
 				Rails.logger.info "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$#{receiver_params}"
 				Rails.logger.info "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$#{user_params}"
 
+        api_id = ApiKey.find_by(access_token: @tok).id
+
+        Rails.logger.info "/////////////////////------------------------------#{api_id}"
+        Rails.logger.info "/////////////////////------------------------------#{@opt[:non]}"
+
 				if caller_obj = User.find_by(uniq_id: params[:user][:uid_caller])
 					Rails.logger.info "caller user already present"
 				else
 					caller_obj = User.create(uniq_id: params[:user][:uid_caller],
                                    name: params[:caller][:name],
-                                   number: params[:caller][:number])
+                                   number: params[:caller][:number],
+                                   api_key_id: api_id)
 				end
 				
 				if receiver_obj = User.find_by(uniq_id: params[:user][:uid_receiver])
@@ -26,7 +32,8 @@ module Api
 				else
 					receiver_obj = User.create(uniq_id: params[:user][:uid_receiver],
                                      name: params[:receiver][:name],
-                                     number: params[:receiver][:number])
+                                     number: params[:receiver][:number],
+                                     api_key_id: api_id)
 				end
 
 				Rails.logger.info "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$#{@meeting_param}"
@@ -46,7 +53,8 @@ module Api
 																		duration: meeting_params[:duration],
 																		order_id: meeting_params[:order_id],
                                     start_time: start_time,
-                                    start_date: start_time
+                                    start_date: start_time,
+                                    api_key_id: api_id
                                     )
 
 				encrypted_caller_id = VERIFIER.generate(caller_obj.uniq_id)
@@ -87,7 +95,9 @@ module Api
 			end
 
 			def restrict_access
-				authenticate_or_request_with_http_token do |token, options|
+	      authenticate_or_request_with_http_token do |token, options|
+          @tok = token
+          @opt = options
 					ApiKey.exists?(access_token: token)
 				end
 			end
