@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140415081921) do
+ActiveRecord::Schema.define(version: 20140416122719) do
 
   create_table "api_keys", force: true do |t|
     t.string   "access_token"
@@ -44,8 +44,10 @@ ActiveRecord::Schema.define(version: 20140415081921) do
     t.integer  "api_key_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "remember_token"
   end
 
   add_index "users", ["api_key_id"], name: "index_users_on_api_key_id"
+  add_index "users", ["remember_token"], name: "index_users_on_remember_token"
 
 end

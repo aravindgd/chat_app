@@ -11,6 +11,9 @@ ChatApp::Application.routes.draw do
   end
   resources :meetings
   root "api_keys#index"
+
+  match "sessions" => "sessions#create", via: [:post]
+  match "signout" => "sessions#destroy", via: [:delete]
   
   match "call" => "meetings#call", via: [:get, :post]	
   match "voice" => "meetings#voice", via: [:get, :post]

@@ -107,18 +107,9 @@ class MeetingsController < ApplicationController
   # GET /meetings
   # GET /meetings.json
   def index
-    if params[:acc_tok].present?
-      begin
-        uid = VERIFIER.verify(params[:acc_tok])
-        if @user = User.find_by(uniq_id: uid)
-          @meetings = Meeting.where("caller_id =? OR receiver_id =?", @user.id, @user.id)
-          nil.test!
-        end
-      rescue
-        @meetings = Meeting.all
-      end
+    if current_user
+      @meetings = Meeting.where("caller_id =? OR receiver_id =?", current_user.id, current_user.id)
     else
-      nil.test!
       @meetings = Meeting.all
     end
   end

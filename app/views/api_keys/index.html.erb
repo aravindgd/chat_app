@@ -1,3 +1,4 @@
+<div class="col-md-5 col-md-offset-1">
 <h1>Listing api_keys</h1>
 
 <table>
@@ -21,3 +22,14 @@
 <br>
 
 <%= link_to 'New Api key', new_api_key_path %>
+</div>
+
+<div class="col-md-5 col-md-offset-1">
+<%= form_for(:session, url: sessions_path, method: "post") do |f| %>
+
+      <%= f.label :acc_tok %>
+      <%= f.text_field :acc_tok %>
+
+      <%= f.submit "Sign in", class: "btn btn-sm btn-primary" %>
+<% end %>
+</div>
