@@ -28,12 +28,14 @@
       <td><%= meeting.start_time.to_formatted_s(:time)%> <%= meeting.start_date.to_formatted_s(:long) %></td>
       <td><%= meeting.duration %></td>
       <td><%= link_to 'Show', meeting, class: "btn btn-info" %></td>
-      <% if params[:caller_id] %>
-        <td><%= link_to 'Call', call_path(:meeting_id => meeting.id), class: "btn btn-success" %>
-    <% elsif params[:receiver_id] %>
+      <% if signed_in? %>
+        <% if meeting.caller_id == current_user.id %>
+          <td><%= link_to 'Call', call_path(:meeting_id => meeting.id), class: "btn btn-success" %>
+        <% elsif meeting.receiver_id == current_user.id %>
           <td><%= link_to 'Call', call_path(:meeting_id => meeting.id, :u => "p"), class: "btn btn-success" %></td>
-      <% else %>
+        <% else %>
           <td></td>
+        <% end %>
       <% end %>
       </tr> 
     <% end %>
