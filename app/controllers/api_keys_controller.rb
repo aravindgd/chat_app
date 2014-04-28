@@ -69,6 +69,6 @@ class ApiKeysController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def api_key_params
-      params[:api_key]
+      params.require(:api_key).permit(:app_name)
     end
 end

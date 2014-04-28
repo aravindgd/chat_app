@@ -1,4 +1,20 @@
-<p id="notice"><%= notice %></p>
+<div class="col-md-6 col-md-offset-3">
+  <p id="notice"><%= notice %></p>
+  <table>
+    <thead>
+      <tr>
+        <th> App Name </th>
+        <th> Access Token </th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td><%= @api_key.app_name %></td>
+      <td><%= @api_key.access_token %></td>
+    </tr>
+    </tbody>
+  </table>
 
-<%= link_to 'Edit', edit_api_key_path(@api_key) %> |
-<%= link_to 'Back', api_keys_path %>
+  <%= link_to 'Edit', edit_api_key_path(@api_key) %> |
+  <%= link_to 'Back', api_keys_path %>
+</div>
